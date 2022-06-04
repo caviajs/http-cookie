@@ -15,7 +15,36 @@ npm install @caviajs/http-cookie --save
 <h4>Usage</h4>
 </div>
 
-// todo
+Request cookies:
+
+```typescript
+import { HttpCookie } from '@caviajs/http-cookie';
+
+// ...
+router.intercept((request, response, next) => {
+  request.cookies = HttpCookie.parse(request);
+
+  return next.handle();
+});
+// ...
+```
+
+Response cookies:
+
+```typescript
+import { HttpCookie } from '@caviajs/http-cookie';
+
+// ...
+router.route({
+  handler: (request, response, next) => {
+    HttpCookie.setCookie(response, 'breed', 'american', { /* ... */ });
+    // or
+    HttpCookie.deleteCookie(response, 'breed');
+  },
+  // ...
+});
+// ...
+```
 
 <div align="center">
   <sub>Built with ❤︎ by <a href="https://partyka.dev">Paweł Partyka</a></sub>
