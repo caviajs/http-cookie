@@ -1,0 +1,18 @@
+# blacklist all
+*
+!*/
+
+# include whitelist
+!/.github/**
+!/.husky/**
+!/src/**
+!/test/**
+!/.commitlintrc.json
+!/.editorconfig
+!/.gitignore
+!/LICENSE
+!/package.json
+!/package-lock.json
+!/README.md
+!/tsconfig.build.json
+!/tsconfig.json
