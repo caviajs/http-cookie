@@ -37,9 +37,9 @@ import { HttpCookie } from '@caviajs/http-cookie';
 // ...
 router.route({
   handler: (request, response, next) => {
-    HttpCookie.setCookie(response, 'breed', 'american', { /* ... */ });
+    HttpCookie.set(response, 'foo', 'bar', { /* ... */ });
     // or
-    HttpCookie.deleteCookie(response, 'breed');
+    HttpCookie.delete(response, 'foo');
   },
   // ...
 });
