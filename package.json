@@ -1,7 +1,7 @@
 {
   "name": "@caviajs/http-cookie",
   "description": "a micro framework for node.js",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Paweł Partyka",
   "license": "MIT",
   "homepage": "https://caviajs.com",
