@@ -2,7 +2,7 @@ import http from 'http';
 import supertest from 'supertest';
 import { HttpCookie } from '../src';
 
-it('serialize', async () => {
+it('set', async () => {
   let cookies: string[];
 
   const httpServer: http.Server = http.createServer((request, response) => {
@@ -31,7 +31,7 @@ it('serialize', async () => {
   ]);
 });
 
-it('serialize with domain', async () => {
+it('set with domain', async () => {
   let cookies: string[];
 
   const httpServer: http.Server = http.createServer((request, response) => {
@@ -50,7 +50,7 @@ it('serialize with domain', async () => {
   ]);
 });
 
-it('serialize with expires', async () => {
+it('set with expires', async () => {
   let cookies: string[];
 
   const httpServer: http.Server = http.createServer((request, response) => {
@@ -69,7 +69,7 @@ it('serialize with expires', async () => {
   ]);
 });
 
-it('serialize with httpOnly', async () => {
+it('set with httpOnly', async () => {
   let cookies: string[];
 
   const httpServer: http.Server = http.createServer((request, response) => {
@@ -90,7 +90,7 @@ it('serialize with httpOnly', async () => {
   ]);
 });
 
-it('serialize with maxAge', async () => {
+it('set with maxAge', async () => {
   let cookies: string[];
 
   const httpServer: http.Server = http.createServer((request, response) => {
@@ -113,7 +113,7 @@ it('serialize with maxAge', async () => {
   ]);
 });
 
-it('serialize with path', async () => {
+it('set with path', async () => {
   let cookies: string[];
 
   const httpServer: http.Server = http.createServer((request, response) => {
@@ -132,7 +132,7 @@ it('serialize with path', async () => {
   ]);
 });
 
-it('serialize with sameSite', async () => {
+it('set with sameSite', async () => {
   let cookies: string[];
 
   const httpServer: http.Server = http.createServer((request, response) => {
@@ -155,7 +155,7 @@ it('serialize with sameSite', async () => {
   ]);
 });
 
-it('serialize with secure', async () => {
+it('set with secure', async () => {
   let cookies: string[];
 
   const httpServer: http.Server = http.createServer((request, response) => {
@@ -176,7 +176,7 @@ it('serialize with secure', async () => {
   ]);
 });
 
-it('serialize with multiple options', async () => {
+it('set with multiple options', async () => {
   let cookies: string[];
 
   const httpServer: http.Server = http.createServer((request, response) => {
