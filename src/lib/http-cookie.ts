@@ -1,25 +1,14 @@
+import { Interceptor, Next } from '@caviajs/http-router';
 import * as http from 'http';
+import { Observable } from 'rxjs';
 
 export class HttpCookie {
   public static delete(response: http.ServerResponse, name: string): void {
     HttpCookie.set(response, name, '', { maxAge: 0, expires: new Date(0) });
   }
 
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie
-  public static parse(request: http.IncomingMessage): Cookies {
-    return Object
-      .values((request.headers.cookie || '').split('; '))
-      // skip things that don't look like key=value
-      .filter((cookie: string) => cookie.includes('='))
-      .reduce((prev: Cookies, cookie: string) => {
-        const [key, value] = cookie.split('=');
-
-        return { ...prev, [key.trim()]: tryDecode(value.trim()) };
-      }, {});
-  }
-
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
   public static set(response: http.ServerResponse, name: string, value: any, options?: CookieSerializationOptions): void {
+    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
     let setCookieHeader = response.getHeader('Set-Cookie') || [];
 
     if (typeof setCookieHeader === 'number') {
@@ -33,6 +22,23 @@ export class HttpCookie {
     setCookieHeader.push(serializeCookie(name, value, options));
 
     response.setHeader('Set-Cookie', setCookieHeader);
+  }
+
+  public static setup(): Interceptor {
+    return async (request: http.IncomingMessage, response: http.ServerResponse, next: Next): Promise<Observable<any>> => {
+      // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie
+      request.cookies = Object
+        .values((request.headers.cookie || '').split('; '))
+        // skip things that don't look like key=value
+        .filter((cookie: string) => cookie.includes('='))
+        .reduce((prev: http.Cookies, cookie: string) => {
+          const [key, value] = cookie.split('=');
+
+          return { ...prev, [key.trim()]: tryDecode(value.trim()) };
+        }, {});
+
+      return next.handle();
+    };
   }
 }
 
@@ -86,10 +92,6 @@ function tryDecode(value: string) {
   } catch (error) {
     return value;
   }
-}
-
-export interface Cookies {
-  [name: string]: string;
 }
 
 export interface CookieSerializationOptions {
