@@ -1,3 +1,3 @@
 import './typings';
 
-export * from './lib/http-cookie';
+export * from './http-cookie';
