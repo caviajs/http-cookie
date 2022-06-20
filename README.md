@@ -19,13 +19,16 @@ Request cookies:
 
 ```typescript
 import { HttpCookie } from '@caviajs/http-cookie';
+import { Interceptor } from '@caviajs/http-router';
 
+export const HttpCookieInterceptor: Interceptor = HttpCookie.setup({ /* ... */ });
 // ...
-router.intercept((request, response, next) => {
-  request.cookies = HttpCookie.parse(request);
+```
 
-  return next.handle();
-});
+```typescript
+// ...
+httpRouter
+  .intercept(HttpCookieInterceptor)
 // ...
 ```
 
