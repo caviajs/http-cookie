@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@caviajs/http-exception": "~0.1.2",
-    "@caviajs/http-router": "~0.1.1",
+    "@caviajs/http-router": "~0.1.2",
     "@commitlint/cli": "~17.0.2",
     "@commitlint/config-conventional": "~17.0.2",
     "@types/jest": "~27.4.1",
@@ -39,7 +39,7 @@
   },
   "peerDependencies": {
     "@caviajs/http-exception": "~0.1.2",
-    "@caviajs/http-router": "~0.1.1"
+    "@caviajs/http-router": "~0.1.2"
   },
   "jest": {
     "coverageDirectory": "coverage",
