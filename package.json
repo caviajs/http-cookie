@@ -21,7 +21,7 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@caviajs/http-exception": "~0.1.1",
+    "@caviajs/http-exception": "~0.1.2",
     "@caviajs/http-router": "~0.1.1",
     "@commitlint/cli": "~17.0.2",
     "@commitlint/config-conventional": "~17.0.2",
@@ -38,7 +38,7 @@
     "typescript": "~4.7.4"
   },
   "peerDependencies": {
-    "@caviajs/http-exception": "~0.1.1",
+    "@caviajs/http-exception": "~0.1.2",
     "@caviajs/http-router": "~0.1.1"
   },
   "jest": {
