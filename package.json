@@ -26,7 +26,7 @@
     "@caviajs/http-exception": "~0.1.2",
     "@caviajs/http-router": "~0.1.2",
     "@commitlint/cli": "~17.0.3",
-    "@commitlint/config-conventional": "~17.0.2",
+    "@commitlint/config-conventional": "~17.0.3",
     "@types/jest": "~27.4.1",
     "@types/node": "~18.0.0",
     "@types/supertest": "~2.0.12",
