@@ -3,50 +3,90 @@
 <p>ecosystem for your guinea pig</p>
 </div>
 
-<div align="center">
-<h4>Installation</h4>
-</div>
+## Introduction
+
+An HTTP cookie is a small piece of data stored by the user's browser. Cookies were designed to be a reliable mechanism
+for websites to remember stateful information. When the user visits the website again, the cookie is automatically sent
+with the request.
+
+## Usage
+
+### Installation
 
 ```shell
 npm install @caviajs/http-cookie --save
 ```
 
-<div align="center">
-<h4>Usage</h4>
-</div>
+### Request cookies
 
-Request cookies:
+#### Configure the interceptor
 
 ```typescript
 import { HttpCookie } from '@caviajs/http-cookie';
 import { Interceptor } from '@caviajs/http-router';
 
-export const HttpCookieInterceptor: Interceptor = HttpCookie.setup({ /* ... */ });
-// ...
+export const HttpCookieInterceptor: Interceptor = HttpCookie.setup();
 ```
+
+#### Bind the interceptor
 
 ```typescript
-// ...
 httpRouter
-  .intercept(HttpCookieInterceptor)
-// ...
+  .intercept(HttpCookieInterceptor);
 ```
 
-Response cookies:
+#### Use cookies
 
 ```typescript
 import { HttpCookie } from '@caviajs/http-cookie';
 
-// ...
-router.route({
-  handler: (request, response, next) => {
-    HttpCookie.set(response, 'foo', 'bar', { /* ... */ });
-    // or
-    HttpCookie.delete(response, 'foo');
-  },
-  // ...
-});
-// ...
+router
+  .route({
+    handler: (request, response, next) => {
+      // request.cookies.foo
+    },
+    /* ... */
+  });
+```
+
+### Response cookies
+
+#### Set cookie
+
+```typescript
+import { HttpCookie } from '@caviajs/http-cookie';
+
+router
+  .route({
+    handler: (request, response, next) => {
+      HttpCookie.set(response, 'name', 'value', {
+        /* 
+          domain?: string;
+          expires?: Date;
+          httpOnly?: boolean;
+          maxAge?: number;
+          path?: string;
+          sameSite?: 'Lax' | 'Strict' | 'None';
+          secure?: boolean; 
+        */
+      });
+    },
+    /* ... */
+  });
+```
+
+#### Delete cookie
+
+```typescript
+import { HttpCookie } from '@caviajs/http-cookie';
+
+router
+  .route({
+    handler: (request, response, next) => {
+      HttpCookie.delete(response, 'name');
+    },
+    /* ... */
+  });
 ```
 
 <div align="center">
