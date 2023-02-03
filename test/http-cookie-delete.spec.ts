@@ -1,6 +1,6 @@
 import http from 'http';
 import supertest from 'supertest';
-import { HttpCookie } from '../../src';
+import { HttpCookie } from '../src';
 
 it('delete', async () => {
   let cookies: string[];

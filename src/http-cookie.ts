@@ -1,6 +1,4 @@
 import * as http from 'http';
-import { Observable } from 'rxjs';
-import { Interceptor, Next } from '../router/http-router';
 
 export class HttpCookie {
   public static delete(response: http.ServerResponse, name: string, options?: CookieDeleteOptions): void {
@@ -24,21 +22,17 @@ export class HttpCookie {
     response.setHeader('Set-Cookie', setCookieHeader);
   }
 
-  public static setup(): Interceptor {
-    return async (request: http.IncomingMessage, response: http.ServerResponse, next: Next): Promise<Observable<any>> => {
-      // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie
-      request.cookies = Object
-        .values((request.headers.cookie || '').split('; '))
-        // skip things that don't look like key=value
-        .filter((cookie: string) => cookie.includes('='))
-        .reduce((prev: http.Cookies, cookie: string) => {
-          const [key, value] = cookie.split('=');
+  public static parse(request: http.IncomingMessage): Cookies {
+    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie
+    return Object
+      .values((request.headers.cookie || '').split('; '))
+      // skip things that don't look like key=value
+      .filter((cookie: string) => cookie.includes('='))
+      .reduce<Cookies>((prev: Cookies, cookie: string) => {
+        const [key, value] = cookie.split('=');
 
-          return { ...prev, [key.trim()]: tryDecode(value.trim()) };
-        }, {});
-
-      return next.handle();
-    };
+        return { ...prev, [key.trim()]: tryDecode(value.trim()) };
+      }, {});
   }
 }
 
@@ -92,6 +86,10 @@ function tryDecode(value: string) {
   } catch (error) {
     return value;
   }
+}
+
+export interface Cookies {
+  [name: string]: string;
 }
 
 export interface CookieDeleteOptions {

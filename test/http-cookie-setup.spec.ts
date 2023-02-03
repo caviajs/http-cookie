@@ -1,18 +1,14 @@
 import http from 'http';
 import supertest from 'supertest';
-import { HttpCookie, HttpRouter } from '../../src';
+import { Cookies, HttpCookie } from '../src';
 
 it('setup', async () => {
-  let cookies: http.Cookies;
-
-  const httpRouter: HttpRouter = new HttpRouter();
-
-  httpRouter
-    .intercept(HttpCookie.setup())
-    .route({ handler: (request) => cookies = request.cookies, method: 'GET', path: '/' });
+  let cookies: Cookies;
 
   const httpServer: http.Server = http.createServer((request, response) => {
-    httpRouter.handle(request, response);
+    cookies = HttpCookie.parse(request);
+
+    response.end();
   });
 
   await supertest(httpServer)
