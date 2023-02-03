@@ -82,7 +82,3 @@ router
     /* ... */
   });
 ```
-
-<div align="center">
-  <sub>Built with ❤︎ by <a href="https://partyka.dev">Paweł Partyka</a></sub>
-</div>
