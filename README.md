@@ -19,22 +19,6 @@ npm install @caviajs/http-cookie --save
 
 ### Request cookies
 
-#### Configure the interceptor
-
-```typescript
-import { HttpCookie } from '@caviajs/http-cookie';
-import { Interceptor } from '@caviajs/http-router';
-
-export const HttpCookieInterceptor: Interceptor = HttpCookie.setup();
-```
-
-#### Bind the interceptor
-
-```typescript
-httpRouter
-  .intercept(HttpCookieInterceptor);
-```
-
 #### Use cookies
 
 ```typescript
@@ -43,7 +27,9 @@ import { HttpCookie } from '@caviajs/http-cookie';
 router
   .route({
     handler: (request, response, next) => {
-      // request.cookies.foo
+      const cookies = HttpCookie.parse(request);
+      
+      // cookies...
     },
     /* ... */
   });
