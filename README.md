@@ -19,7 +19,7 @@ npm install @caviajs/http-cookie --save
 
 ### Request cookies
 
-#### Use cookies
+#### Parse cookies
 
 ```typescript
 import { HttpCookie } from '@caviajs/http-cookie';
