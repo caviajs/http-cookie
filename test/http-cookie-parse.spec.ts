@@ -2,7 +2,7 @@ import http from 'http';
 import supertest from 'supertest';
 import { Cookies, HttpCookie } from '../src';
 
-it('setup', async () => {
+it('parse', async () => {
   let cookies: Cookies;
 
   const httpServer: http.Server = http.createServer((request, response) => {
